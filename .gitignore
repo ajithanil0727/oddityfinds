@@ -1,0 +1,77 @@
+# Ignore Python bytecode files
+__pycache__/
+*.pyc
+
+# Ignore database files
+db.sqlite3
+*.sqlite3
+
+# Ignore environment-specific settings files
+.env
+
+# Ignore logs and error reports
+log/
+logs/
+*.log
+*.log.*
+*.log-*
+*.err
+
+# Ignore secret and sensitive information
+*.secret
+*.sensitive
+
+# Ignore development-specific files
+*.db
+*.sqlite
+*.settings
+*.local
+
+# Ignore compiled Python files
+*.pyo
+*.pyd
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore system-generated files
+Thumbs.db
+
+# Ignore virtual environment files
+venv/
+.env/
+
+# Ignore cache directories
+__cache__/
+.cache/
+
+# Ignore user-specific files
+user_settings.json
+
+# Ignore local project settings
+settings_local.py
+
+# Ignore test files
+*.test
+*.tests
+*.testing
+
+# Ignore temporary and backup files
+*.bak
+*.swp
+
+# Ignore IDE and editor-specific files
+.idea/
+.vscode/
+
+# Ignore packaging and distribution files
+dist/
+build/
+*.egg-info/
+*.egg
+*.egg-info
+*.eggs
+
+# Ignore automatically generated migration files
+*.pyc
+migrations/
