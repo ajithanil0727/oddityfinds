@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'assets/css/user_log.css' %}">
+    <title>home</title>
+</head>
+<body>
+    
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+          <!-- Tabs Titles -->
+          <h2 class="active"> USER LOGIN </h2>
+      
+
+      
+          <!-- Login Form -->
+          <form method="POST" action="{% url 'user_view' %}">
+            {% csrf_token %}
+            <input type="text" id="login" class="fadeIn second" name="username" placeholder="login">
+            <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+            <input type="submit" class="fadeIn fourth" value="Log In">
+          </form>
+      
+          <!-- Remind Passowrd -->
+          <div id="formFooter">
+            {% for message in messages %}<p class="small fw-bold mt-2 pt-1 mb-0 alert">{{ message }}</p>{% endfor %}
+            <p class="small fw-bold mt-2 pt-1 mb-0"><a href="{% url 'adminlogin' %}"
+              class="link-danger">Admin login</a></p>
+            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="{% url 'signup' %}" class="link-danger">Register</a></p>
+            <p class="small fw-bold mt-2 pt-1 mb-0">Forgot your password?  <a href="{% url 'reset_password' %}" class="link-danger">Reset it here</a></p>
+
+
+          </div>
+      
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

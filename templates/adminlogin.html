@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'assets/css/adminlogin.css' %}">
+    <title>home</title>
+</head>
+<body>
+    
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+          <!-- Tabs Titles -->
+          <h2 class="active"> ADMIN LOGIN </h2>
+      
+      
+          <!-- Login Form -->
+          <form method="POST" action="{% url 'adminlogin' %}">
+            {% csrf_token %}
+            <input type="text" id="login" class="fadeIn second" name="username" placeholder="login">
+            <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+            <input type="submit" class="fadeIn fourth" value="Log In">
+            
+          </form>
+          {%for message in messages %}<p>{{ message }}</p>{% endfor %}
+          <!-- Remind Passowrd -->
+          <div id="formFooter">
+            <p class="small fw-bold mt-2 pt-1 mb-0"><a href="{% url 'user_view' %}"
+              class="link-danger">user login</a></p>
+          </div>
+      
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

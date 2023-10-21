@@ -1,0 +1,42 @@
+
+.card {
+    background: #fff;
+    /* White background */
+    border: 1px solid #ddd;
+    /* Light gray border */
+    color: #333;
+    /* Dark gray text color */
+    margin-bottom: 2rem;
+    padding: 20px;
+    /* Add padding to the card */
+    height: 400px;
+}
+.card button.btn {
+    background: #007BFF;
+    /* Blue background */
+    border: 2px solid #007BFF;
+    /* Blue border */
+    color: #fff;
+    /* White text color */
+    padding: 10px 20px;
+    /* Add padding to the button */
+    border-radius: 5px;
+    /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.card button.btn:hover {
+    background: #0056b3;
+    /* Lighter blue background on hover */
+    border-color: #0056b3;
+    /* Lighter blue border on hover */
+}
+
+
+
+.card-text {
+    height: 30%; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

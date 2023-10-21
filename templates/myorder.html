@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @media (min-width: 1025px) {
+            .h-custom {
+            height: 100vh !important;
+            }
+            }
+            
+            .card-registration .select-input.form-control[readonly]:not([disabled]) {
+            font-size: 1rem;
+            line-height: 2.15;
+            padding-left: .75em;
+            padding-right: .75em;
+            }
+            
+            .card-registration .select-arrow {
+            top: 13px;
+            }
+            
+            .bg-grey {
+            background-color: #eae8e8;
+            }
+            
+            @media (min-width: 992px) {
+            .card-registration-2 .bg-grey {
+            border-top-right-radius: 16px;
+            border-bottom-right-radius: 16px;
+            }
+            }
+            
+            @media (max-width: 991px) {
+            .card-registration-2 .bg-grey {
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+            }
+            }
+    </style>
+   
+</head>
+<body>
+ 
+    <section class="h-100 h-custom" style="background-color: #d2c9ff;">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12">
+              <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+                <div class="card-body p-0">
+                  <div class="row g-0">
+                    <div class="col-lg">
+                      <div class="p-5">
+                        <div class="d-flex justify-content-between align-items-center mb-5">
+                          <h1 class="fw-bold mb-0 text-black">My Orders</h1>
+                        </div>
+                        <div>{%for message in messages %}<p>{{ message }}</p>{% endfor %}</div>
+                        {% for item in order_items %}
+                        <hr class="my-4">
+      
+                        <div class="row mb-4 d-flex justify-content-between align-items-center">
+                          <div class="col-md-2 col-lg-2 col-xl-2">
+                            <img
+                              src="{{ item.product.main_image.url}}"
+                              class="img-fluid rounded-3" alt="Cotton T-shirt">
+                          </div>
+                          <div class="col-md-3 col-lg-3 col-xl-3">
+                            <a href="{% url 'vieworderitem' item.id %}" class="text-decoration-none">{{ item.product.proname }}</a>
+                            <h6 class="text-black mb-0">{{ item.product.category.categoryname }}</h6>
+                          </div>
+                          <div class="col-md-3 col-lg-3 col-xl-2">
+                            <h6 class="text-muted">{{ item.quantity }}</h6>
+                          </div>
+                          <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                            <h6 class="mb-0">€{{ item.item_price }}</h6>
+                          </div>
+                          <div class="col-md-1 col-lg-1 col-xl-1">
+                            {% if item.is_cancel %}
+                              <p>Order Cancelled</p>
+                            {% elif item.returned %}
+                              <p>Order Returned</p>
+                            {% elif item.status == 'Delivered' %}
+                            <a class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModalCenter1{{ item.id }}" >Return Order</a>
+                            {% else %}
+                            <a class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModalCenter{{ item.id }}" >Cancel Order</a>
+                            {% endif %}
+                          </div>
+                        </div>
+                        {% endfor %}
+                        <hr class="my-4">
+      
+                        <div class="pt-5">
+                          <h6 class="mb-0"><a href="{% url 'home' %}" class="text-body"><i
+                                class="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a></h6>
+                        </div>
+                        <div class="pagination d-flex justify-content-center">
+                          <span class="step-links">
+                              {% if order_items.has_previous %}
+                                  <a href="?page=1">&laquo; first</a>
+                                  <a href="?page={{ order_items.previous_page_number }}">previous</a>
+                              {% endif %}
+                              
+                              <span class="current-page">{{ order_items.number }} of {{ order_items.paginator.num_pages }}</span>
+                              
+                              {% if order_items.has_next %}
+                                  <a href="?page={{ order_items.next_page_number }}">next</a>
+                                  <a href="?page={{ order_items.paginator.num_pages }}">last &raquo;</a>
+                              {% endif %}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+  {% for i in order_items %}
+<div class="modal fade" id="exampleModalCenter{{ i.id }}" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold" id="exampleModalCenterTitle">Cancel Order</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure want to cancel order item "{{ i.product.proname }}" ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+        <a href="{% url 'cancelorder' i.id %}" type="button" class="btn btn-outline-danger">Cancle Order</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% for i in order_items %}
+<div class="modal fade" id="exampleModalCenter1{{ i.id }}" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold" id="exampleModalCenterTitle">Return Order</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure want to return order item "{{ i.product.proname }}" ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+        <a href="{% url 'returnorder' i.id %}" type="button" class="btn btn-outline-danger">Return Order</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+
+     
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    
+  </body>
+</html>

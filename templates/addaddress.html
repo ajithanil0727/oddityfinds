@@ -1,0 +1,70 @@
+
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">  
+  </head>
+<body>
+
+ <div style="padding: 2rem 30rem;"> 
+    
+        <div >
+          <div class="card mb-4">
+            <div class="card-header py-3">
+              <h5 class="mb-0">Biling details</h5>
+            </div>
+            <div class="card-body">
+              <form method="POST" action="{% url 'addaddress' %}">
+                {% csrf_token %}
+                <!-- Text input -->
+                <div class="form-outline mb-4">
+                  <input type="text" id="form7Example3" class="form-control" name="address_line1" />
+                  <label class="form-label" for="form7Example3">address_line1</label>
+                </div>
+      
+                <!-- Text input -->
+                <div class="form-outline mb-4">
+                  <input type="text" id="form7Example4" class="form-control" name="address_line2"/>
+                  <label class="form-label" for="form7Example4">address_line2</label>
+                </div>
+      
+                <!-- city input -->
+                <div class="form-outline mb-4">
+                    <input type="text" id="form7Example4" class="form-control" name="city"/>
+                    <label class="form-label" for="form7Example4">city</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                    <input type="text" id="form7Example4" class="form-control" name="state"/>
+                    <label class="form-label" for="form7Example4">state</label>
+                </div>
+      
+                <!-- Number input -->
+                <div class="form-outline mb-4">
+                  <input type="number" id="form7Example6" class="form-control" name="postal_code" />
+                  <label class="form-label" for="form7Example6">postal_code</label>
+                </div>
+      
+                <!-- Message input -->
+                <div class="form-outline mb-4">
+                    <input type="text" id="form7Example4" class="form-control" name="country"/>
+                    <label class="form-label" for="form7Example4">country</label> 
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+      
+              </form>
+            </div>
+          </div>
+        
+    </div>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+      
+</body>
+      </html>
