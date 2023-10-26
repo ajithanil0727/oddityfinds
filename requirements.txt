@@ -23,4 +23,5 @@ sqlparse==0.4.4
 twilio==8.9.0
 tzdata==2023.3
 urllib3==2.0.5
+whitenoise==6.6.0
 yarl==1.9.2
